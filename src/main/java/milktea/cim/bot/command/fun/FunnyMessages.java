@@ -19,7 +19,7 @@ public class FunnyMessages {
 
   private final Random random = new XORShift();
 
-  private final List<String> messages;
+  final List<String> messages;
 
   public FunnyMessages() {
     String json;
