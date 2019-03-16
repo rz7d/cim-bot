@@ -19,7 +19,7 @@ public class WordFinderListener extends ListenerAdapter {
     if (Objects.equals(event.getAuthor(), event.getJDA().getSelfUser()))
       return;
 
-    var text = event.getMessage().getContentDisplay();
+    var text = event.getMessage().getContentRaw();
     Optional<? extends Matcher> result = WordFinder.matcher(Normalizer.normalize(text, Normalizer.Form.NFKC));
     if (result.isEmpty())
       return;
