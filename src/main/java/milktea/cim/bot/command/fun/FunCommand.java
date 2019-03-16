@@ -1,7 +1,6 @@
-package milktea.cim.bot.command;
+package milktea.cim.bot.command.fun;
 
 import java.awt.Color;
-import java.util.List;
 import java.util.Random;
 
 import milktea.cim.bot.event.MessageCommandEvent;
@@ -14,19 +13,14 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 public final class FunCommand {
 
   private static final Color COLOR = new Color(141, 222, 180);
-  private static final List<String> FUNNY_MESSAGES = List.of(
-    "回鍋肉",
-    "速報 山田孝之の乳首 7つに増える",
-    "山田孝之 82万だったことが判明",
-    "エビデンス",
-    "ワセス",
-    "テイクJ",
-    "こんにちワイマックス",
-    "趣がある",
-    "オココ",
-    "ShareX");
 
   private final Random random = new XORShift();
+
+  private final FunnyMessages messages;
+
+  public FunCommand(FunnyMessages messages) {
+    this.messages = messages;
+  }
 
   @Command(name = "fun", description = "お楽しみをします。funはフンという意味です。", permission = "cf.azuredev.cim.bot.command.utilities.fun")
   public void execute(MessageCommandEvent args) {
@@ -48,15 +42,12 @@ public final class FunCommand {
         .setTitle("大当たり")
         .setImage(me.getAvatarUrl())
         .build();
+    } else {
+      return builder
+        .setTitle("フン")
+        .appendDescription(messages.generate())
+        .build();
     }
-    return builder
-      .setTitle("フン")
-      .appendDescription(generate())
-      .build();
-  }
-
-  public String generate() {
-    return FUNNY_MESSAGES.get(random.nextInt(FUNNY_MESSAGES.size()));
   }
 
 }
