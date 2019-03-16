@@ -25,8 +25,6 @@ public class WordFinderListener extends ListenerAdapter {
       return;
 
     Matcher matcher = result.get();
-    assert matcher.find();
-
     var found = matcher.group();
     var name = event.getAuthor().getName();
     var avatar = event.getAuthor().getAvatarUrl();
