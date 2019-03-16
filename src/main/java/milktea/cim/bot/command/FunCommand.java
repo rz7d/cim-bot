@@ -2,6 +2,7 @@ package milktea.cim.bot.command;
 
 import java.awt.Color;
 import java.util.List;
+import java.util.Random;
 
 import milktea.cim.bot.event.MessageCommandEvent;
 import milktea.cim.framework.command.Command;
@@ -21,9 +22,11 @@ public final class FunCommand {
     "ワセス",
     "テイクJ",
     "こんにちワイマックス",
-    "趣がある");
+    "趣がある",
+    "オココ",
+    "ShareX");
 
-  private final XORShift random = new XORShift();
+  private final Random random = new XORShift();
 
   @Command(name = "fun", description = "お楽しみをします。funはフンという意味です。", permission = "cf.azuredev.cim.bot.command.utilities.fun")
   public void execute(MessageCommandEvent args) {
@@ -36,9 +39,9 @@ public final class FunCommand {
     var sender = event.getAuthor();
     var me = event.getJDA().getSelfUser();
 
-    var builder = new EmbedBuilder();
-    builder.setFooter(sender.getName(), sender.getAvatarUrl());
-    builder.setColor(COLOR);
+    var builder = new EmbedBuilder()
+      .setFooter(sender.getName(), sender.getAvatarUrl())
+      .setColor(COLOR);
 
     if (Double.compare(random.nextDouble(), 0.001) < 0) {
       return builder
