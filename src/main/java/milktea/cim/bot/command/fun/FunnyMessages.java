@@ -11,13 +11,11 @@ import java.util.logging.Logger;
 
 import com.alibaba.fastjson.JSON;
 
-import milktea.cim.framework.util.random.XORShift;
-
 public class FunnyMessages {
 
   private static final Logger LOGGER = Logger.getLogger(FunnyMessages.class.getName());
 
-  private final Random random = new XORShift();
+  private final Random random = new Random();
 
   final List<String> messages;
 
