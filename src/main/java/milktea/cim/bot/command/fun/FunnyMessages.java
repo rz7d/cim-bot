@@ -1,4 +1,4 @@
-package milktea.cim.bot.command;
+package milktea.cim.bot.command.fun;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;

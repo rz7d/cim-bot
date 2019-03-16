@@ -7,8 +7,8 @@ import java.util.StringTokenizer;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import milktea.cim.bot.command.FunCommand;
-import milktea.cim.bot.command.FunnyMessages;
+import milktea.cim.bot.command.fun.FunCommand;
+import milktea.cim.bot.command.fun.FunnyMessages;
 import milktea.cim.bot.event.MessageCommandEvent;
 import milktea.cim.framework.command.CommandBus;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;

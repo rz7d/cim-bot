@@ -1,4 +1,4 @@
-package milktea.cim.bot.command;
+package milktea.cim.bot.command.fun;
 
 import java.awt.Color;
 import java.util.Random;
