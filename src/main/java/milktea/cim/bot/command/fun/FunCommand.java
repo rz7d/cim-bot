@@ -5,7 +5,6 @@ import java.util.Random;
 
 import milktea.cim.bot.event.MessageCommandEvent;
 import milktea.cim.framework.command.Command;
-import milktea.cim.framework.util.random.XORShift;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.MessageEmbed;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
@@ -14,7 +13,7 @@ public final class FunCommand {
 
   private static final Color COLOR = new Color(141, 222, 180);
 
-  private final Random random = new XORShift();
+  private final Random random = new Random();
 
   private final FunnyMessages messages;
 
