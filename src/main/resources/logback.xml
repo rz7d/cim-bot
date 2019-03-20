@@ -14,7 +14,7 @@
 			<onMismatch>ACCEPT</onMismatch>
 		</filter>
 		<encoder>
-			<pattern>%-5level %d{yyyy/MM/dd HH:mm:ss.SSS} [%thread] %msg%n</pattern>
+			<pattern>%level %d{yyyy/MM/dd HH:mm:ss.SSS} [%thread] %msg%n</pattern>
 		</encoder>
 	</appender>
 
