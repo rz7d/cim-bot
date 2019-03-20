@@ -21,7 +21,7 @@ public final class FunCommand {
     this.messages = messages;
   }
 
-  @Command(name = "fun", description = "お楽しみをします。funはフンという意味です。", permission = "cf.azuredev.cim.bot.command.utilities.fun")
+  @Command(name = "fun", description = "お楽しみをします。funはフンという意味です。", permission = "milktea.cim.bot.command.fun")
   public void execute(MessageCommandEvent args) {
     var event = args.getEvent();
     var channel = event.getChannel();
