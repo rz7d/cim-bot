@@ -11,7 +11,7 @@ import java.util.stream.IntStream;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.OnlineStatus;
 
-public class OnlineStatusRotater extends TimerTask {
+public class OnlineStatusRotator extends TimerTask {
 
   private static final List<OnlineStatus> STATUSES = List.of(
     OnlineStatus.ONLINE,
@@ -28,7 +28,7 @@ public class OnlineStatusRotater extends TimerTask {
     .mapToObj(STATUSES::get)
     .iterator();
 
-  public OnlineStatusRotater(JDA discord, Duration delay, Duration period) {
+  public OnlineStatusRotator(JDA discord, Duration delay, Duration period) {
     this.discord = Objects.requireNonNull(discord);
     this.delay = Objects.requireNonNull(delay);
     this.period = Objects.requireNonNull(period);
