@@ -14,13 +14,15 @@ import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
 public class WordFinderListener extends ListenerAdapter {
 
+  private final WordFinder finder = new WordFinder();
+
   @Override
   public void onMessageReceived(MessageReceivedEvent event) {
     if (Objects.equals(event.getAuthor(), event.getJDA().getSelfUser()))
       return;
 
     var text = event.getMessage().getContentRaw();
-    Optional<? extends Matcher> result = WordFinder.matcher(Normalizer.normalize(text, Normalizer.Form.NFKC));
+    Optional<? extends Matcher> result = finder.matcher(Normalizer.normalize(text, Normalizer.Form.NFKC));
     if (result.isEmpty())
       return;
 

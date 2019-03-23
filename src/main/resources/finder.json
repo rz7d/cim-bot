@@ -1,0 +1,32 @@
+[
+  {
+    "name": "hmage",
+    "language": "en",
+    "pattern": "[HEhe]\\s*[MGmg]\\s*a\\s*[GMgm]\\s*[EHeh]"
+  },
+  {
+    "name": "hmage",
+    "language": "ja",
+    "pattern": "[はハ]\\s*([るル])?\\s*[まマ]\\s*[げゲ]\\s*([んン]|[どド]\\s*[んン])?|春\\s*[馬真間]\\s*源"
+  },
+  {
+    "name": "kizoku",
+    "language": "ja",
+    "pattern": "本\\s*物\\s*貴\\s*族|((半|[ハは]\\s*[ンん])\\s*(間|[マま]))\\s*(巌|[イい]\\s*[ワわ]\\s*[オお])?"
+  },
+  {
+    "name": "asayama",
+    "language": "ja",
+    "pattern": "(朝|[あア]\\s*[さサ])\\s*(山|[やヤ]\\s*[まマ])\\s*(貴|[たタ]\\s*[かカ])\\s*(生|[おオ])"
+  },
+  {
+    "name": "yamada",
+    "language": "ja",
+    "pattern": "(山|[やヤ]\\s*[まマ])\\s*(田|[だダ])\\s*(孝|[たタ]\\s*[かカ])\\s*(之|[ゆユ]\\s*[きキ])"
+  },
+  {
+    "name": "hoikoro",
+    "language": "ja",
+    "pattern": "回\\s*鍋\\s*肉|[ほホ]\\s*[いイ]\\s*[こコ]\\s*[うウー]?\\s*[ろロ]\\s*[うウー]?"
+  }
+]
