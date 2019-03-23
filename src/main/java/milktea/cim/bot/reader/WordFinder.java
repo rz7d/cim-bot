@@ -2,6 +2,7 @@ package milktea.cim.bot.reader;
 
 import java.util.Collection;
 import java.util.Optional;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -31,20 +32,13 @@ public final class WordFinder {
     .collect(Collectors.toList());
 
   public static Optional<? extends Matcher> matcher(String text) {
-    LOGGER.info("Matching text: " + text);
-    if (text.contains("```")) {
-      // reject
-      LOGGER.warning("Rejected: " + text);
-      return Optional.empty();
-    }
     for (var pattern : PATTERNS) {
       var matcher = pattern.matcher(text);
       if (matcher.find()) {
-        LOGGER.info("Match pattern: " + matcher.group());
+        LOGGER.log(Level.INFO, "Match: {0}, Text: {1}", new Object[] { matcher.group(), text });
         return Optional.of(matcher);
       }
     }
-    LOGGER.info("Unmatched Text: " + text);
     return Optional.empty();
   }
 

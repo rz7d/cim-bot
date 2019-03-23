@@ -26,6 +26,13 @@
         <configuration>
           <mainClass>${mainClass}</mainClass>
         </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>java</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
       <plugin>
         <artifactId>maven-jar-plugin</artifactId>
