@@ -25,6 +25,11 @@
         <version>1.6.0</version>
         <configuration>
           <mainClass>${mainClass}</mainClass>
+          <compilerArgs>
+            <arg>--add-modules JDA</arg>
+            <arg>--add-modules fastjson</arg>
+            <arg>--add-modules slf4j.api</arg>
+          </compilerArgs>
         </configuration>
         <executions>
           <execution>
