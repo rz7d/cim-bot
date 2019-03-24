@@ -1,19 +1,20 @@
 package milktea.cim.bot.reader;
 
-import com.alibaba.fastjson.JSON;
-import milktea.cim.bot.command.fun.FunnyMessages;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.alibaba.fastjson.JSON;
+
+import milktea.cim.bot.command.fun.FunnyMessages;
 
 public final class WordFinder {
 
@@ -39,9 +40,9 @@ public final class WordFinder {
 
       builder.add(Pattern.compile(pattern));
       LOGGER.info("Loading Pattern \"{}\" ({}): \"{}\"",
-        name,
-        new Locale(language).getDisplayLanguage(),
-        pattern);
+          name,
+          new Locale(language).getDisplayLanguage(),
+          pattern);
     }
     builder.trimToSize();
     this.patterns = builder;
