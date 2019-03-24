@@ -6,14 +6,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import com.alibaba.fastjson.JSON;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class FunnyMessages {
 
-  private static final Logger LOGGER = Logger.getLogger(FunnyMessages.class.getName());
+  private static final Logger LOGGER = LoggerFactory.getLogger(FunnyMessages.class);
 
   private final Random random = new Random();
 
@@ -41,7 +41,7 @@ public class FunnyMessages {
         authorName = "azure";
       }
       builder.add(content);
-      LOGGER.log(Level.INFO, "Loading funny message \"{0}\" by {1}", new Object[] { content, authorName });
+      LOGGER.info("Loading funny message \"{}\" by {}", content, authorName);
     }
     builder.trimToSize();
     this.messages = builder;
