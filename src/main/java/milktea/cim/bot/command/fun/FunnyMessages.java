@@ -49,7 +49,8 @@ public class FunnyMessages {
     }
 
     public FunnyMessages(List<String> messages) {
-        this.messages = Objects.requireNonNull(messages);
+        Objects.requireNonNull(messages);
+        this.messages = List.copyOf(messages);
     }
 
     public String generate() {
