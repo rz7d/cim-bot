@@ -1,6 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>milktea.cim.bot</groupId>
   <artifactId>cim-bot</artifactId>
@@ -20,11 +18,28 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.8.0</version>
         <configuration>
-          <release>11</release>
+          <release>12</release>
           <compilerArgs>
-            <arg>--add-modules JDA</arg>
-            <arg>--add-modules fastjson</arg>
-            <arg>--add-modules slf4j.api</arg>
+            <arg>--add-exports</arg>
+            <arg>org.slf4j/org.slf4j=ALL-UNNAMED</arg>
+            <arg>--add-exports</arg>
+            <arg>org.slf4j/org.slf4j.spi=ALL-UNNAMED</arg>
+            <arg>--add-exports</arg>
+            <arg>org.slf4j/org.slf4j.event=ALL-UNNAMED</arg>
+            <arg>--add-exports</arg>
+            <arg>org.slf4j/org.slf4j.helpers=ALL-UNNAMED</arg>
+            <arg>--add-exports</arg>
+            <arg>milktea.cim.base/milktea.cim.framework.command=ALL-UNNAMED</arg>
+            <arg>--add-exports</arg>
+            <arg>milktea.cim.base/milktea.cim.framework.connector=ALL-UNNAMED</arg>
+            <arg>--add-exports</arg>
+            <arg>milktea.cim.base/milktea.cim.framework.event=ALL-UNNAMED</arg>
+            <arg>--add-exports</arg>
+            <arg>milktea.cim.base/milktea.cim.framework.event.extension=ALL-UNNAMED</arg>
+            <arg>--add-exports</arg>
+            <arg>milktea.cim.base/milktea.cim.framework.interactive=ALL-UNNAMED</arg>
+            <arg>--add-exports</arg>
+            <arg>milktea.cim.base/milktea.cim.framework.permission=ALL-UNNAMED</arg>
           </compilerArgs>
         </configuration>
       </plugin>
