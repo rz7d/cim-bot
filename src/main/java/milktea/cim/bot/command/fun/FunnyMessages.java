@@ -7,9 +7,10 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Random;
 
-import com.alibaba.fastjson.JSON;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.alibaba.fastjson.JSON;
 
 public class FunnyMessages {
 
