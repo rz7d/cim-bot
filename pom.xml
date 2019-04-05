@@ -4,16 +4,13 @@
   <artifactId>cim-bot</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
-
   <name>YAMADA TAKAYUKI Bot Framework</name>
-
   <properties>
     <project.build.sourceEncoding>utf-8</project.build.sourceEncoding>
     <junit.jupiter.version>5.4.0</junit.jupiter.version>
     <junit.platform.version>1.4.0</junit.platform.version>
     <mainClass>milktea.cim.bot.main.Main</mainClass>
   </properties>
-
   <build>
     <plugins>
       <plugin>
@@ -85,7 +82,6 @@
       </plugin>
     </plugins>
   </build>
-
   <repositories>
     <repository>
       <id>jcenter</id>
@@ -93,13 +89,7 @@
       <url>http://jcenter.bintray.com</url>
     </repository>
   </repositories>
-
   <dependencies>
-    <dependency>
-      <groupId>net.dv8tion</groupId>
-      <artifactId>JDA</artifactId>
-      <version>3.8.3_460</version>
-    </dependency>
     <dependency>
       <groupId>com.alibaba</groupId>
       <artifactId>fastjson</artifactId>
@@ -147,5 +137,6 @@
   </dependencies>
   <modules>
     <module>cim-bot-core</module>
+    <module>cim-bot-essentials</module>
   </modules>
 </project>
