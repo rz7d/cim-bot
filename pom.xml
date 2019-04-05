@@ -1,6 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>milktea.cim.bot</groupId>
   <artifactId>cim-bot</artifactId>
@@ -8,8 +6,6 @@
   <name>YAMADA TAKAYUKI Bot Framework</name>
 
   <properties>
-    <maven.compiler.source>11</maven.compiler.source>
-    <maven.compiler.target>11</maven.compiler.target>
     <project.build.sourceEncoding>utf-8</project.build.sourceEncoding>
     <junit.jupiter.version>5.4.0</junit.jupiter.version>
     <junit.platform.version>1.4.0</junit.platform.version>
@@ -19,24 +15,33 @@
   <build>
     <plugins>
       <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>exec-maven-plugin</artifactId>
-        <version>1.6.0</version>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.0</version>
         <configuration>
-          <mainClass>${mainClass}</mainClass>
+          <release>12</release>
           <compilerArgs>
-            <arg>--add-modules JDA</arg>
-            <arg>--add-modules fastjson</arg>
-            <arg>--add-modules slf4j.api</arg>
+            <arg>--add-exports</arg>
+            <arg>org.slf4j/org.slf4j=ALL-UNNAMED</arg>
+            <arg>--add-exports</arg>
+            <arg>org.slf4j/org.slf4j.spi=ALL-UNNAMED</arg>
+            <arg>--add-exports</arg>
+            <arg>org.slf4j/org.slf4j.event=ALL-UNNAMED</arg>
+            <arg>--add-exports</arg>
+            <arg>org.slf4j/org.slf4j.helpers=ALL-UNNAMED</arg>
+            <arg>--add-exports</arg>
+            <arg>milktea.cim.base/milktea.cim.framework.command=ALL-UNNAMED</arg>
+            <arg>--add-exports</arg>
+            <arg>milktea.cim.base/milktea.cim.framework.connector=ALL-UNNAMED</arg>
+            <arg>--add-exports</arg>
+            <arg>milktea.cim.base/milktea.cim.framework.event=ALL-UNNAMED</arg>
+            <arg>--add-exports</arg>
+            <arg>milktea.cim.base/milktea.cim.framework.event.extension=ALL-UNNAMED</arg>
+            <arg>--add-exports</arg>
+            <arg>milktea.cim.base/milktea.cim.framework.interactive=ALL-UNNAMED</arg>
+            <arg>--add-exports</arg>
+            <arg>milktea.cim.base/milktea.cim.framework.permission=ALL-UNNAMED</arg>
           </compilerArgs>
         </configuration>
-        <executions>
-          <execution>
-            <goals>
-              <goal>java</goal>
-            </goals>
-          </execution>
-        </executions>
       </plugin>
       <plugin>
         <artifactId>maven-jar-plugin</artifactId>
@@ -55,14 +60,26 @@
         <executions>
           <execution>
             <phase>package</phase>
-            <goals>
-              <goal>shade</goal>
-            </goals>
           </execution>
         </executions>
         <configuration>
           <minimizeJar>true</minimizeJar>
         </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>1.6.0</version>
+        <configuration>
+          <mainClass>${mainClass}</mainClass>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>java</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>

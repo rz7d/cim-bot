@@ -13,32 +13,30 @@ import net.dv8tion.jda.core.entities.Game;
 
 public final class DiscordBot extends Extension {
 
-  @EventHandler
-  public void onEnable(ExtensionEnableEvent event) {
-    if (!event.getExtension().equals(this))
-      return;
-    discord.getPresence().setStatus(OnlineStatus.ONLINE);
-  }
+    @EventHandler
+    public void onEnable(ExtensionEnableEvent event) {
+        if (!event.getExtension().equals(this))
+            return;
+        discord.getPresence().setStatus(OnlineStatus.ONLINE);
+    }
 
-  @EventHandler
-  public void onDisable(ExtensionDisableEvent event) {
-    if (!event.getExtension().equals(this))
-      return;
-    discord.getPresence().setStatus(OnlineStatus.OFFLINE);
-  }
+    @EventHandler
+    public void onDisable(ExtensionDisableEvent event) {
+        if (!event.getExtension().equals(this))
+            return;
+        discord.getPresence().setStatus(OnlineStatus.OFFLINE);
+    }
 
-  private final JDA discord;
+    private final JDA discord;
 
-  public DiscordBot(String token) throws LoginException {
-    this.discord = new JDABuilder()
-      .setToken(token)
-      .addEventListener(new WordFinderListener(), new CommandMessageListener())
-      .setGame(Game.watching("回鍋肉"))
-      .build();
-  }
+    public DiscordBot(String token) throws LoginException {
+        this.discord = new JDABuilder().setToken(token)
+                .addEventListener(new WordFinderListener(), new CommandMessageListener()).setGame(Game.watching("回鍋肉"))
+                .build();
+    }
 
-  public void waitForConnect() throws InterruptedException {
-    discord.awaitReady();
-  }
+    public void waitForConnect() throws InterruptedException {
+        discord.awaitReady();
+    }
 
 }

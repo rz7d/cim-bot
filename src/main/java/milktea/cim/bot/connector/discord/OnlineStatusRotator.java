@@ -13,38 +13,34 @@ import net.dv8tion.jda.core.OnlineStatus;
 
 public class OnlineStatusRotator extends TimerTask {
 
-  private static final List<OnlineStatus> STATUSES = List.of(
-    OnlineStatus.ONLINE,
-    OnlineStatus.IDLE,
-    OnlineStatus.DO_NOT_DISTURB);
+    private static final List<OnlineStatus> STATUSES = List.of(OnlineStatus.ONLINE, OnlineStatus.IDLE,
+            OnlineStatus.DO_NOT_DISTURB);
 
-  private final JDA discord;
-  private final Duration delay;
-  private final Duration period;
+    private final JDA discord;
+    private final Duration delay;
+    private final Duration period;
 
-  private final Timer timer = new Timer();
-  private final Iterator<OnlineStatus> statusIterator = IntStream
-    .iterate(0, i -> i + 1 % STATUSES.size())
-    .mapToObj(STATUSES::get)
-    .iterator();
+    private final Timer timer = new Timer();
+    private final Iterator<OnlineStatus> statusIterator = IntStream.iterate(0, i -> i + 1 % STATUSES.size())
+            .mapToObj(STATUSES::get).iterator();
 
-  public OnlineStatusRotator(JDA discord, Duration delay, Duration period) {
-    this.discord = Objects.requireNonNull(discord);
-    this.delay = Objects.requireNonNull(delay);
-    this.period = Objects.requireNonNull(period);
-  }
+    public OnlineStatusRotator(JDA discord, Duration delay, Duration period) {
+        this.discord = Objects.requireNonNull(discord);
+        this.delay = Objects.requireNonNull(delay);
+        this.period = Objects.requireNonNull(period);
+    }
 
-  public JDA getDiscord() {
-    return discord;
-  }
+    public JDA getDiscord() {
+        return discord;
+    }
 
-  @Override
-  public void run() {
-    discord.getPresence().setStatus(statusIterator.next());
-  }
+    @Override
+    public void run() {
+        discord.getPresence().setStatus(statusIterator.next());
+    }
 
-  public void start() {
-    timer.schedule(this, delay.toMillis(), period.toMillis());
-  }
+    public void start() {
+        timer.schedule(this, delay.toMillis(), period.toMillis());
+    }
 
 }

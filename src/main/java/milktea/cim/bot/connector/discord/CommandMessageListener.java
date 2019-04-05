@@ -16,28 +16,26 @@ import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
 public class CommandMessageListener extends ListenerAdapter {
 
-  private static final Collection<String> prefixes = Stream
-    .of("y!", "有!")
-    .map(p -> Normalizer.normalize(p, Form.NFKC))
-    .collect(Collectors.toList());
+    private static final Collection<String> prefixes = Stream.of("y!", "有!")
+            .map(p -> Normalizer.normalize(p, Form.NFKC)).collect(Collectors.toList());
 
-  private final CommandBus bus = new CommandBus();
+    private final CommandBus bus = new CommandBus();
 
-  public CommandMessageListener() {
-    bus.register(new FunCommand(new FunnyMessages()));
-  }
-
-  @Override
-  public void onMessageReceived(MessageReceivedEvent event) {
-    final var text = Normalizer.normalize(event.getMessage().getContentRaw(), Form.NFKC).trim().toLowerCase();
-    for (var prefix : prefixes) {
-      if (text.startsWith(prefix)) {
-        var tokenizer = new StringTokenizer(text.substring(prefix.length()));
-        var command = tokenizer.nextToken();
-        bus.execute(command, new MessageCommandEvent(event));
-        return;
-      }
+    public CommandMessageListener() {
+        bus.register(new FunCommand(new FunnyMessages()));
     }
-  }
+
+    @Override
+    public void onMessageReceived(MessageReceivedEvent event) {
+        final var text = Normalizer.normalize(event.getMessage().getContentRaw(), Form.NFKC).trim().toLowerCase();
+        for (var prefix : prefixes) {
+            if (text.startsWith(prefix)) {
+                var tokenizer = new StringTokenizer(text.substring(prefix.length()));
+                var command = tokenizer.nextToken();
+                bus.execute(command, new MessageCommandEvent(event));
+                return;
+            }
+        }
+    }
 
 }
