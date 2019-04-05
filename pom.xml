@@ -3,6 +3,8 @@
   <groupId>milktea.cim.bot</groupId>
   <artifactId>cim-bot</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
   <name>YAMADA TAKAYUKI Bot Framework</name>
 
   <properties>
@@ -143,4 +145,7 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+  <modules>
+    <module>cim-bot-core</module>
+  </modules>
 </project>
