@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE logback>
+<configuration>
+	<contextListener
+		class="ch.qos.logback.classic.jul.LevelChangePropagator">
+		<resetJUL>true</resetJUL>
+	</contextListener>
+	<appender name="STDERR"
+		class="ch.qos.logback.core.ConsoleAppender">
+		<target>System.err</target>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>DEBUG</level>
+			<onMatch>DENY</onMatch>
+			<onMismatch>ACCEPT</onMismatch>
+		</filter>
+		<encoder>
+			<pattern>%level %d{yyyy/MM/dd HH:mm:ss.SSS} [%thread] %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="ASYNC_STDERR"
+		class="ch.qos.logback.classic.AsyncAppender">
+		<appender-ref ref="STDERR" />
+	</appender>
+
+	<root level="debug">
+		<appender-ref ref="ASYNC_STDERR" />
+	</root>
+</configuration>
