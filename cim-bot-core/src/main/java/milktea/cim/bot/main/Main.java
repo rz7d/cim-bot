@@ -14,7 +14,7 @@ public final class Main {
 
     public static void main(String[] args) throws Exception {
         var properties = new Properties();
-        properties.load(Files.newBufferedReader(Paths.get("/access.properties")));
+        properties.load(Files.newBufferedReader(Paths.get("./conf/access.properties")));
         var token = properties.getProperty("token_secret");
 
         new DiscordBot(token).connect();
