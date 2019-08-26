@@ -1,19 +1,25 @@
 package milktea.cim.bot.event;
 
-import java.util.Objects;
+import com.mewna.catnip.entity.message.Message;
+import milktea.cim.framework.command.CommandBus;
 
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+public final class MessageCommandEvent {
 
-public class MessageCommandEvent {
+    private final CommandBus commandBus;
 
-    private final MessageReceivedEvent event;
+    private final Message message;
 
-    public MessageCommandEvent(MessageReceivedEvent event) {
-        this.event = Objects.requireNonNull(event);
+    public MessageCommandEvent(CommandBus commandBus, Message message) {
+        this.commandBus = commandBus;
+        this.message = message;
     }
 
-    public MessageReceivedEvent getEvent() {
-        return event;
+    public CommandBus commandBus() {
+        return commandBus;
+    }
+
+    public Message message() {
+        return message;
     }
 
 }

@@ -1,14 +1,14 @@
 package milktea.cim.bot.command.fun;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
-
+import com.mewna.catnip.Catnip;
+import com.mewna.catnip.entity.message.Message;
+import com.mewna.catnip.entity.user.User;
 import org.junit.jupiter.api.Test;
 
-import net.dv8tion.jda.core.JDA;
-import net.dv8tion.jda.core.entities.SelfUser;
-import net.dv8tion.jda.core.entities.User;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class FunCommandTest {
 
@@ -21,14 +21,17 @@ public class FunCommandTest {
 
     @Test
     public void testCreateMessage() {
-        var jda = mock(JDA.class);
-        when(jda.getSelfUser()).thenReturn(mock(SelfUser.class));
+        var discord = mock(Catnip.class);
+        when(discord.selfUser()).thenReturn(mock(User.class));
 
-        var event = mock(MessageReceivedEvent.class);
-        when(event.getJDA()).thenReturn(jda);
+        var event = mock(Message.class);
+        when(event.catnip()).thenReturn(discord);
 
         var author = mock(User.class);
-        when(event.getAuthor()).thenReturn(author);
+        when(event.author()).thenReturn(author);
+
+        when(author.avatarUrl()).thenReturn("https://example.com/example.png");
+        when(author.username()).thenReturn("Example User");
 
         var o = new FunCommand(messages);
         var result = o.createMessage(event);

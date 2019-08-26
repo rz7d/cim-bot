@@ -1,5 +1,10 @@
 package milktea.cim.bot.connector.discord;
 
+import com.mewna.catnip.entity.builder.EmbedBuilder;
+import com.mewna.catnip.entity.message.Message;
+import milktea.cim.bot.reader.WordFinder;
+import milktea.cim.framework.event.EventHandler;
+
 import java.text.MessageFormat;
 import java.text.Normalizer;
 import java.util.Objects;
@@ -7,41 +12,40 @@ import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.stream.IntStream;
 
-import milktea.cim.bot.reader.WordFinder;
-import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
-import net.dv8tion.jda.core.hooks.ListenerAdapter;
-
-public class WordFinderListener extends ListenerAdapter {
+public class WordFinderListener {
 
     private final WordFinder finder = new WordFinder();
 
-    @Override
-    public void onMessageReceived(MessageReceivedEvent event) {
-        if (Objects.equals(event.getAuthor(), event.getJDA().getSelfUser()))
+    @EventHandler
+    public void onMessageReceived(Message message) {
+        if (Objects.equals(message.author(), message.catnip().selfUser()))
             return;
 
-        var text = event.getMessage().getContentRaw();
+        var text = message.content();
         Optional<? extends Matcher> result = finder.matcher(Normalizer.normalize(text, Normalizer.Form.NFKC));
         if (result.isEmpty())
             return;
 
         Matcher matcher = result.get();
         var found = matcher.group();
-        var name = event.getAuthor().getName();
-        var avatar = event.getAuthor().getAvatarUrl();
+        var name = message.author().username();
+        var avatar = message.author().avatarUrl();
 
-        var builder = new EmbedBuilder();
-        builder.setTitle("ワード検出");
-        builder.appendDescription(MessageFormat.format("\"{0}\" を発見しました:", found));
+        var builder = new EmbedBuilder()
+            .title("ワード検出")
+            .description(MessageFormat.format("\"{0}\" を発見しました:", found));
         insertInformation(text, found, matcher.start(), builder);
-        builder.setFooter(name, avatar);
-        event.getChannel().sendMessage(builder.build()).queue();
+        builder.footer(name, avatar);
+        message.channel().sendMessage(builder.build());
     }
 
     private static void insertInformation(String text, String found, int from, EmbedBuilder builder) {
-        builder.appendDescription("```").appendDescription(text).appendDescription(" \r\n")
-                .appendDescription(createLine(text, from, found.length())).appendDescription("```");
+        builder.description(
+            "```" +
+                text +
+                " \r\n" +
+                createLine(text, from, found.length()) +
+                "```");
     }
 
     public static String repeat(char c, int count) {

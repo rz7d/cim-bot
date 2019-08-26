@@ -1,42 +1,31 @@
 package milktea.cim.bot.connector.discord;
 
-import javax.security.auth.login.LoginException;
-
-import milktea.cim.framework.event.EventHandler;
-import milktea.cim.framework.event.extension.ExtensionDisableEvent;
-import milktea.cim.framework.event.extension.ExtensionEnableEvent;
+import com.mewna.catnip.Catnip;
+import com.mewna.catnip.CatnipOptions;
+import com.mewna.catnip.entity.user.Presence;
+import com.mewna.catnip.entity.user.Presence.OnlineStatus;
+import com.mewna.catnip.shard.DiscordEvent;
+import milktea.cim.framework.event.EventBus;
 import milktea.cim.framework.extension.Extension;
-import net.dv8tion.jda.core.JDA;
-import net.dv8tion.jda.core.JDABuilder;
-import net.dv8tion.jda.core.OnlineStatus;
-import net.dv8tion.jda.core.entities.Game;
 
 public final class DiscordBot extends Extension {
 
-    @EventHandler
-    public void onEnable(ExtensionEnableEvent event) {
-        if (!event.getExtension().equals(this))
-            return;
-        discord.getPresence().setStatus(OnlineStatus.ONLINE);
+    private final EventBus eventBus = new EventBus();
+    private final Catnip discord;
+
+    public DiscordBot(String token) {
+        final var options = new CatnipOptions(token);
+        options
+            .presence(Presence.of(OnlineStatus.ONLINE, Presence.Activity.of("♥ Catnip", Presence.ActivityType.WATCHING)));
+
+        this.discord = Catnip.catnip(options);
+        discord.on(DiscordEvent.MESSAGE_CREATE, eventBus::fire);
+        eventBus.register(new WordFinderListener());
+        eventBus.register(new CommandMessageListener());
     }
 
-    @EventHandler
-    public void onDisable(ExtensionDisableEvent event) {
-        if (!event.getExtension().equals(this))
-            return;
-        discord.getPresence().setStatus(OnlineStatus.OFFLINE);
-    }
-
-    private final JDA discord;
-
-    public DiscordBot(String token) throws LoginException {
-        this.discord = new JDABuilder().setToken(token)
-                .addEventListener(new WordFinderListener(), new CommandMessageListener()).setGame(Game.watching("回鍋肉"))
-                .build();
-    }
-
-    public void waitForConnect() throws InterruptedException {
-        discord.awaitReady();
+    public void connect() {
+        discord.connect();
     }
 
 }

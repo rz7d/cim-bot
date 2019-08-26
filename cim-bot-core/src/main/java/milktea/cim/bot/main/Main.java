@@ -1,9 +1,11 @@
 package milktea.cim.bot.main;
 
+import milktea.cim.bot.connector.discord.DiscordBot;
+
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Properties;
 import java.util.concurrent.ForkJoinTask;
-
-import milktea.cim.bot.connector.discord.DiscordBot;
 
 public final class Main {
 
@@ -12,11 +14,10 @@ public final class Main {
 
     public static void main(String[] args) throws Exception {
         var properties = new Properties();
-        properties.load(DiscordBot.class.getResourceAsStream("/access.properties"));
+        properties.load(Files.newBufferedReader(Paths.get("C:\\Users\\azure\\Documents\\workspace\\cim-bot\\access.properties")));
         var token = properties.getProperty("token_secret");
 
-        var bot = new DiscordBot(token);
-        bot.waitForConnect();
+        new DiscordBot(token).connect();
 
         ForkJoinTask.helpQuiesce();
     }

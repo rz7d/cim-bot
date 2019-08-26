@@ -1,13 +1,13 @@
 package milktea.cim.bot.command.fun;
 
-import java.awt.Color;
-import java.util.Random;
-
+import com.mewna.catnip.entity.builder.EmbedBuilder;
+import com.mewna.catnip.entity.message.Embed;
+import com.mewna.catnip.entity.message.Message;
 import milktea.cim.bot.event.MessageCommandEvent;
 import milktea.cim.framework.command.Command;
-import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.entities.MessageEmbed;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+
+import java.awt.*;
+import java.util.Random;
 
 public final class FunCommand {
 
@@ -21,23 +21,23 @@ public final class FunCommand {
         this.messages = messages;
     }
 
-    @Command(name = "fun", description = "お楽しみをします。funはフンという意味です。", permission = "milktea.cim.bot.command.fun")
-    public void execute(MessageCommandEvent args) {
-        var event = args.getEvent();
-        var channel = event.getChannel();
-        channel.sendMessage(createMessage(event)).queue();
+    @Command(name = "fun", description = "お楽しみをします。funはフンという意味です。", permission = "milktea.cim.bot.command.essentials.fun")
+    public void execute(MessageCommandEvent event) {
+        var message = event.message();
+        var channel = message.channel();
+        channel.sendMessage(createMessage(message));
     }
 
-    public MessageEmbed createMessage(MessageReceivedEvent event) {
-        var sender = event.getAuthor();
-        var me = event.getJDA().getSelfUser();
+    public Embed createMessage(Message message) {
+        var sender = message.author();
+        var me = message.catnip().selfUser();
 
-        var builder = new EmbedBuilder().setFooter(sender.getName(), sender.getAvatarUrl()).setColor(COLOR);
+        var response = new EmbedBuilder().footer(sender.username(), sender.avatarUrl()).color(COLOR);
 
         if (Double.compare(random.nextDouble(), 0.001) < 0) {
-            return builder.setTitle("大当たり").setImage(me.getAvatarUrl()).build();
+            return response.title("大当たり").image(me.avatarUrl()).build();
         } else {
-            return builder.setTitle("フン").appendDescription(messages.generate()).build();
+            return response.title("フン").description(messages.generate()).build();
         }
     }
 

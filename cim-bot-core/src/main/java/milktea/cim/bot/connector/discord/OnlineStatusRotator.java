@@ -8,35 +8,39 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.stream.IntStream;
 
-import net.dv8tion.jda.core.JDA;
-import net.dv8tion.jda.core.OnlineStatus;
+import com.mewna.catnip.Catnip;
+import com.mewna.catnip.entity.user.Presence;
+import com.mewna.catnip.entity.user.Presence.OnlineStatus;
 
 public class OnlineStatusRotator extends TimerTask {
 
-    private static final List<OnlineStatus> STATUSES = List.of(OnlineStatus.ONLINE, OnlineStatus.IDLE,
-            OnlineStatus.DO_NOT_DISTURB);
+    private static final List<OnlineStatus> STATUSES = List.of(
+            OnlineStatus.ONLINE,
+            OnlineStatus.IDLE,
+            OnlineStatus.DND);
 
-    private final JDA discord;
+    private final Catnip discord;
     private final Duration delay;
     private final Duration period;
 
     private final Timer timer = new Timer();
-    private final Iterator<OnlineStatus> statusIterator = IntStream.iterate(0, i -> i + 1 % STATUSES.size())
+    private final Iterator<OnlineStatus> statusIterator = IntStream
+            .iterate(0, i -> i + 1 % STATUSES.size())
             .mapToObj(STATUSES::get).iterator();
 
-    public OnlineStatusRotator(JDA discord, Duration delay, Duration period) {
+    public OnlineStatusRotator(Catnip discord, Duration delay, Duration period) {
         this.discord = Objects.requireNonNull(discord);
         this.delay = Objects.requireNonNull(delay);
         this.period = Objects.requireNonNull(period);
     }
 
-    public JDA getDiscord() {
+    public Catnip getDiscord() {
         return discord;
     }
 
     @Override
     public void run() {
-        discord.getPresence().setStatus(statusIterator.next());
+        discord.presence(Presence.of(statusIterator.next()));
     }
 
     public void start() {

@@ -1,6 +1,6 @@
 package milktea.cim.bot.reader;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Optional;
 
