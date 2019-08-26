@@ -4,6 +4,9 @@ import com.mewna.catnip.entity.message.Message;
 import milktea.cim.bot.command.fun.FunCommand;
 import milktea.cim.bot.command.fun.FunnyMessages;
 import milktea.cim.bot.command.help.HelpCommand;
+import milktea.cim.bot.command.yokemongo.CatchCommand;
+import milktea.cim.bot.command.yokemongo.YokedexCommand;
+import milktea.cim.bot.command.yokemongo.Yokemons;
 import milktea.cim.bot.event.MessageCommandEvent;
 import milktea.cim.framework.command.CommandBus;
 import milktea.cim.framework.event.EventHandler;
@@ -28,6 +31,10 @@ public class CommandMessageListener {
     public CommandMessageListener() {
         bus.register(new HelpCommand());
         bus.register(new FunCommand(new FunnyMessages()));
+
+        var yokemons = new Yokemons();
+        bus.register(new YokedexCommand(yokemons));
+        bus.register(new CatchCommand(yokemons));
     }
 
     @EventHandler
