@@ -3,6 +3,7 @@ package milktea.cim.bot.connector.discord;
 import com.mewna.catnip.entity.message.Message;
 import milktea.cim.bot.command.fun.FunCommand;
 import milktea.cim.bot.command.fun.FunnyMessages;
+import milktea.cim.bot.command.help.HelpCommand;
 import milktea.cim.bot.event.MessageCommandEvent;
 import milktea.cim.framework.command.CommandBus;
 import milktea.cim.framework.event.EventHandler;
@@ -25,6 +26,7 @@ public class CommandMessageListener {
     private final CommandBus bus = new CommandBus();
 
     public CommandMessageListener() {
+        bus.register(new HelpCommand());
         bus.register(new FunCommand(new FunnyMessages()));
     }
 
